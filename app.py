@@ -13,28 +13,29 @@ def index():
 @app.route("/chatbot", methods = ['GET', 'POST'])
 def chatbot():
     if request.method == "GET":
+        if not request.args.get("Body"):
+            return "No input provided"
         message = {
             "From" : "Web",
-            "Body" : request.args.get("action"),
+            "Body" : request.args.get("Body"),
             "To"   : "Web"
         }
     elif request.method == "POST":
         message = {
             "From" : request.form.get("From"),
-            "Body" : demojize(request.form.get("Body")),
+            "Body" : request.form.get("Body"),
             "To"   : request.form.get("To")
         }
 
-        action = ChatEngine.parse(message["Body"])
-        output = ChatEngine.execute(action)
+    action = ChatEngine.parse(message["Body"])
+    output = ChatEngine.execute(action)
 
+    if "whatsapp" in message["From"] and "whatsapp" in message["To"]:
         wm = WhatsappMessage(
             src  = message["To"],
             body = output,
             dest = message["From"]
         )
         wm.send()
-    
     print(message)
-
-    return "Hello World"
+    return output
