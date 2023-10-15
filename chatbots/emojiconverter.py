@@ -5,3 +5,8 @@ def textToEmoji(msg:str):
 
 def emojiToText(msg:str):
     return "Converting emoji to text - " + demojize(msg)
+
+BOTS = {
+    'emojitext' : emojiToText,
+    'textemoji' : textToEmoji
+}
