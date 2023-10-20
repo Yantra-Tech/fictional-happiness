@@ -1,5 +1,8 @@
 from typing import Any
+
 from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
+
 from os import environ
 from dotenv import load_dotenv
 
@@ -38,6 +41,16 @@ class WhatsappMessage:
             to      = self.to
         )
         return self.api_response
+    
+    def respond(self):
+        response = MessagingResponse()
+        response.message(
+            from_ = self.from_,
+            body  = self.body,
+            to    = self.to
+        )
+        return str(response)
+        
 
 if __name__ == "__main__" :
     wm = WhatsappMessage(

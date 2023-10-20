@@ -15,6 +15,7 @@ def chatbot():
     if request.method == "GET":
         if not request.args.get("Body"):
             return "No input provided"
+        
         message = {
             "From" : "Web",
             "Body" : request.args.get("Body"),
@@ -36,6 +37,12 @@ def chatbot():
             body = output,
             dest = message["From"]
         )
-        wm.send()
-    print(message)
+        output = wm.respond()
+    # print(wm)
+    # print(output)
     return output
+
+@app.route("/errors", methods = ["GET", "POST"])
+def errors():
+    print(request)
+    return ""

@@ -8,7 +8,10 @@ class _ChatAction:
         self.output = None
     
     def _execute(self):
-        self.output = self.bot(self.args)
+        try :
+            self.output = self.bot(self.args)
+        except Exception as e:
+            self.output = str(e)
         return self.output
 
 class ChatEngine:
@@ -33,4 +36,4 @@ class ChatEngine:
         output = bot._execute()
         if not output:
             raise Exception("Some Error Occurred -> chatengine.py:29")
-        return output
+        return output 

@@ -1,9 +1,11 @@
 from emoji import demojize, emojize
 
-def textToEmoji(msg:str):
+def textToEmoji(*args, **kwargs):
+    msg = args[0]
     return "Converting text to emoji - " + emojize(msg)
 
-def emojiToText(msg:str):
+def emojiToText(*args, **kwargs):
+    msg = args[0]
     return "Converting emoji to text - " + demojize(msg)
 
 BOTS = {
