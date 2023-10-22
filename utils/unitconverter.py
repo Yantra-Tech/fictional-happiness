@@ -1,5 +1,31 @@
 __unrecognized_units = ValueError("The units are not recognized.")
 
+HELP = {
+    'temperature' : '''Convert temperature units ( C, F, K )''',
+    'length'      : '''Convert length units ( km, m, cm, mm )''',
+    'time'        : '''Convert time units ( H, M, S )''',
+    'weight'      : '''Convert weight units ( kg, g )'''
+}
+
+HELP_SYNTAX = {
+    'temperature' : '''
+    *Syntax :*
+        ```convert temperature <value> <from> to <to>```
+    \n''',
+    'length' : '''
+    *Syntax :*
+        ```convert length <value> <from> to <to>```
+    \n''',
+    'time' : '''
+    *Syntax :*
+        ```convert time <value> <from> to <to>```
+    \n''',
+    'weight' : '''
+    *Syntax :*
+        ```convert weight <value> <from> to <to>```
+    \n'''
+}
+
 def convert_temperature(value:float, from_unit:str, to_unit:str):
     if from_unit not in ('C', 'K', 'F'):
         raise __unrecognized_units
@@ -133,3 +159,8 @@ MICRO_BOTS = {
     'time'          : lambda from_, to_ : wrapper( from_,    convert_time,        to_ ),
     'weight'        : lambda from_, to_ : wrapper( from_,    convert_weight,      to_ )
 }
+
+
+for bot in MICRO_BOTS:
+    MICRO_BOTS[bot].HELP = HELP[bot]
+    MICRO_BOTS[bot].HELP_SYNTAX = HELP_SYNTAX[bot]

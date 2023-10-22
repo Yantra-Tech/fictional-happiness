@@ -44,5 +44,5 @@ def chatbot():
 
 @app.route("/errors", methods = ["GET", "POST"])
 def errors():
-    print(request)
+    print(request.form)
     return ""

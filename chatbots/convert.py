@@ -6,6 +6,15 @@ _registered_micro_bots.update(unitconverter.MICRO_BOTS)
 
 _syntax_error = SyntaxError("Incorrect syntax")
 
+HELP = '''
+Convert units or emojis : 
+'''
+
+HELP_SYNTAX = '''
+*Syntax:*
+```convert <microbot> <params>```
+----------------------------------
+\n'''
 
 def convert(*args:str, **kwargs:str):
     # temp 20 C to F
@@ -32,3 +41,12 @@ def convert(*args:str, **kwargs:str):
 BOTS = {
     "convert" : convert
 }
+
+
+for i, bot in enumerate(_registered_micro_bots):
+    bot = _registered_micro_bots[bot]
+    HELP_SYNTAX += f"{i+1}. {bot.HELP} {bot.HELP_SYNTAX}"
+
+for bot in BOTS:
+    BOTS[bot].HELP = HELP
+    BOTS[bot].HELP_SYNTAX = HELP_SYNTAX
